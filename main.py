@@ -26,19 +26,9 @@ class App:
     def on_render(self):
         # self.screen.blit(self.image_card,(0,0))
         self.card.blit_color(self.screen,(10,0),(255,0,0))
-        self.card.blit_color(self.screen,(10+self.card.width+40,0),(255,255,0))
-        # background=pygame.Surface((40,40))
-        # background.fill(pygame.Color(1,2,3,255)) #gbar
-        # pxarray=pygame.surfarray.array2d(background)
-
-        # w,h=120,160
-        # pxarray=pygame.PixelArray(self.screen.subsurface(Rect(0,0,w,h)))
-        # for x in range(0,w):
-        #     for y in range(0,h):
-        #         if pxarray[x,y]==(self.screen.map_rgb((255,0,255,255)) & 0xffffffff):
-        #             pxarray[x,y]=(255,0,0)
+        self.card.blit_color(self.screen,(10+self.card.width+20,0),(255,255,0))
+        self.card.blit_color(self.screen,(10+(self.card.width+20)*2,0),(0,255,0))
         
-        # pygame.surfarray.blit_array(self.screen.subsurface(Rect(0,0,w,h)),pxarray)
         pygame.display.flip()
                                        
     def on_cleanup(self):
