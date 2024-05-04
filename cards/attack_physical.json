@@ -1,0 +1,19 @@
+[{
+    "Name":"Arthur's Blade",
+    "Icon":"",
+    "Description":"",
+    "DamageType":"Physical",
+    "DamageDuration":3,
+    "Damage":20,
+    "Mana":30,
+    "AreaOfEffect":false
+},{
+    "Name":"Spear of Achilles",
+    "Icon":"",
+    "Description":"",
+    "DamageType":"Physical",
+    "DamageDuration":1,
+    "Damage":60,
+    "Mana":50,
+    "AreaOfEffect":false
+}]

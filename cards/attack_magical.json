@@ -1,0 +1,21 @@
+[{
+    "Name":"Dragon's Breath",
+    "Icon":"",
+    "Description":"",
+    "DamageType":"Magical",
+    "DamageDuration":1,
+    "Damage":100,
+    "Mana":50,
+    "AreaOfEffect":true
+},
+{
+    "Name":"Stare of Medusa",
+    "Icon":"",
+    "Description":"",
+    "DamageType":"Magical",
+    "DamageDuration":4,
+    "Damage":15,
+    "Mana":150,
+    "AreaOfEffect":true
+}]
+
