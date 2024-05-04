@@ -15,7 +15,7 @@ class App:
     def __init__(self):
         self.running = True
         self.screen = None
-        self.size = self.weight, self.height = 928, 793
+        self.size = self.weight, self.height = 928, 820
         
         self.font=None
 
@@ -30,7 +30,8 @@ class App:
         self.running = True
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 
-        self.card=Card()
+        self.card=Card("Physical",0)
+        self.card2=Card("Magical",1)
         self.bg=Background()     
         self.character=Character()
         
@@ -61,7 +62,8 @@ class App:
 
         self.character.blit_color(deltaTime,self.screen,(0,330))
 
-        self.card.blit_color(self.screen,(0,0),0)
+        self.card.blit_color(self.screen,(0,self.height-280),0)
+        self.card2.blit_color(self.screen,(250,self.height-280),0)
 
         # self.card.blit_color(self.screen,(10+self.card.width+20,0),(255,255,0))
         # self.card.blit_color(self.screen,(10+(self.card.width+20)*2,0),(255,255,0))

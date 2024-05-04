@@ -20,7 +20,8 @@ class CardObj:
     def __init__(self,damage_type,index):
         self.font= pygame.font.SysFont('Arial', 20)
         surface=pygame.image.load("img/cards/card_bg.png").convert()
-        self.bg_image=pygame.transform.scale_by(surface,0.08)
+        self.bg_image=pygame.transform.scale(surface, (240,280))
+        pygame.draw.rect(self.bg_image, (0,0,0), pygame.Rect(0, 0, 240, 280))
 
         if damage_type=="Magical":
             with open('cards/attack_magical.json', 'r') as file:
@@ -42,27 +43,33 @@ class CardObj:
         self.AreaOfEffect=card["AreaOfEffect"]
 
     def get_image(self):
-        self.image=pygame.transform.scale_by(pygame.image.load(self.Icon).convert().copy(),0.2)
+        self.image=pygame.transform.scale(pygame.image.load(self.Icon).convert().copy(), (220,220))
         width,height=self.image.get_size()
         self.width=width
         self.height=height
 
 
-        self.bg_image.blit(self.image,(15,45))
+        self.bg_image.blit(self.image,(10,10))
 
-        self.font= pygame.font.SysFont('Arial', 20)
-        text_surface = self.font.render(self.Name, True, (0, 0, 0))
-        self.bg_image.blit(text_surface,(30,20))
+        self.font= pygame.font.SysFont('Arial', 24, bold=True)
+        text_surface = self.font.render(self.Name, True, (255, 255, 255))
+        self.bg_image.blit(text_surface,(10,240))
 
-        self.font= pygame.font.SysFont('Arial', 15)
-        text_surface = self.font.render("Dam:"+str(self.Damage), True, (0, 0, 0))
-        self.bg_image.blit(text_surface,(120,50))
+        self.font= pygame.font.SysFont('Arial', 18, bold=True)
+        text_surface = self.font.render(str(self.Damage)+"d", True, (255, 255, 255))
+        self.bg_image.blit(text_surface,(195,10))
 
-        text_surface = self.font.render("Dur:"+str(self.DamageDuration), True, (0, 0, 0))
-        self.bg_image.blit(text_surface,(120,80))
+        text_surface = self.font.render(str(self.DamageDuration)+"r", True, (255, 255, 255))
+        self.bg_image.blit(text_surface,(210,32))
 
-        text_surface = self.font.render("Man:"+str(self.Mana), True, (0, 0, 0))
-        self.bg_image.blit(text_surface,(120,110))
+        color=(255, 0, 0)
+        if self.AreaOfEffect:
+            color=(0, 255, 0)
+        text_surface = self.font.render("AOE", True, color)
+        self.bg_image.blit(text_surface,(200,50))
+
+        text_surface = self.font.render(str(self.Mana)+"m", True, (255, 255, 255))
+        self.bg_image.blit(text_surface,(10,10))
 
         
         return self.bg_image
@@ -73,8 +80,8 @@ class Card:
     
     obj=None
 
-    def __init__(self):
-        self.obj=CardObj("Magical",0)
+    def __init__(self,type,index):
+        self.obj=CardObj(type,index)
     
     def blit_color(self,screen,pos,i):
         # data=pygame.PixelArray(self.image.copy())
