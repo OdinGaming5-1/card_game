@@ -4,6 +4,7 @@ from pygame.locals import *
 
 from Card import Card
 from Background import Background
+from Character import Character
 
 class App:
     FPS=60
@@ -15,6 +16,7 @@ class App:
         self.clock=pygame.time.Clock()
         self.card=None
         self.bg=None
+        self.character=None
  
     def on_init(self):
         pygame.init()
@@ -22,7 +24,9 @@ class App:
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 
         self.card=Card()
-        self.bg=Background()        
+        self.bg=Background()     
+        self.character=Character()
+
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
@@ -31,6 +35,8 @@ class App:
         pass
     def on_render(self):
         self.bg.blit_color(self.screen)
+
+        self.character.blit_color(self.screen,(0,330))
 
         # self.card.blit_color(self.screen,(0,0),(255,0,0))
 
