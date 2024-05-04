@@ -1,7 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+__pycache__/*
 *.pyc
-./*.pyc
 *.py[cod]
 
 # C extensions
@@ -10,3 +10,4 @@ __pycache__/
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+# __pycache__/Card.cpython-312.pyc
