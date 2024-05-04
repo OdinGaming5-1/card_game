@@ -35,7 +35,20 @@ class App:
         # pygame.surfarray.blit_array( surf, pixels )
         # self._display_surf.blit(surf,(0,0))
 
+        background=pygame.Surface((40,40))
+        background.fill(Color(1,2,3,4)) #gbar
+        pxarray=pygame.surfarray.array2d(background)
+        for x in range(0,40):
+            for y in range(0,40):
+                pix=pxarray[x,y]
+                r=pix >> 24 & 0xFF
+                g=pix>> 16 & 0xFF
+                b=pix>> 8 & 0xFF
+                a=pix & 0xFF
+                print("r:"+str(r)+" g:"+str(g)+" b:"+str(b)+" a:"+str(a))
+        pygame.surfarray.blit_array(self._display_surf.subsurface(Rect(0,0,40,40)),pxarray)
         pygame.display.flip()
+
     def on_cleanup(self):
         pygame.quit()
  
