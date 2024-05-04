@@ -26,7 +26,7 @@ class Sprite:
 
 class Character:
     sprites={"_Idle":Sprite("_Idle",120),"_Attack":Sprite("_Attack",120),"_Run":Sprite("_Run",120),"_Roll":Sprite("_Roll",120)}
-    state="_Roll"
+    state="_Idle"
     
     def __init__(self):
         pass        
@@ -37,3 +37,6 @@ class Character:
         screen.blit(scaled,pos)
         return self
 
+    def change_state(self,state):
+        self.state=state
+        return self

@@ -30,6 +30,18 @@ class App:
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                self.running=False
+            elif event.key == pygame.K_LEFT:
+                self.character.change_state("_Attack")
+            elif event.key == pygame.K_RIGHT:
+                self.character.change_state("_Run")
+            elif event.key == pygame.K_SPACE:
+                self.character.change_state("_Roll")
+            else:
+                self.character.change_state("_Idle")
+
     def on_loop(self):
         self.clock.tick(self.FPS)
         pass
