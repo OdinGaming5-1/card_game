@@ -14,14 +14,14 @@ class Sprite:
         self.width=slice_width
         self.duration=duration
 
-    def getSurface(self):
+    def getSurface(self,dt):
         if self.template_img is None:
-            self.template_img=pygame.image.load("img/Free Knight 120x80/"+self.template_fname+".png").convert()
+            self.template_img=pygame.image.load("img/Free Knight 120x80/"+self.template_fname+".png").convert_alpha()
             full_width,self.height=self.template_img.get_size()
             self.frames=full_width/self.width
 
         surface=self.template_img.subsurface(pygame.Rect(math.floor(self.i)*self.width,0,self.width,self.height))
-        self.i=(self.i+1/self.duration)%self.frames
+        self.i=(self.i+((1 * dt)/self.duration))%self.frames
         return surface
 
 class Character:
@@ -31,9 +31,9 @@ class Character:
     def __init__(self):
         pass        
 
-    def blit_color(self,screen,pos):
+    def blit_color(self,dt,screen,pos):
         sprite=self.sprites[self.state]
-        scaled=pygame.transform.scale_by(sprite.getSurface(),2.5)
+        scaled=pygame.transform.scale_by(sprite.getSurface(dt),2.5)
         screen.blit(scaled,pos)
         return self
 

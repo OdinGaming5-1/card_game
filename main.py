@@ -1,6 +1,7 @@
 import pygame
 import pygame.surfarray
 from pygame.locals import *
+import time
 
 from Card import Card
 from Background import Background
@@ -8,6 +9,9 @@ from Character import Character
 
 class App:
     FPS=60
+    prev_time=time.time()
+    TARGET_FPS=60
+    dt=0
     def __init__(self):
         self.running = True
         self.screen = None
@@ -46,12 +50,16 @@ class App:
                 self.character.change_state("_Idle")
 
     def on_loop(self):
-        self.clock.tick(self.FPS)
-        pass
-    def on_render(self):
-        self.bg.blit_color(self.screen)
+        now = time.time()
+        self.dt = now - self.prev_time
+        self.prev_time = now
+        #self.clock.tick(self.FPS)
 
-        self.character.blit_color(self.screen,(0,330))
+    def on_render(self):
+        deltaTime = self.dt * self.TARGET_FPS
+        self.bg.blit_color(deltaTime, self.screen)
+
+        self.character.blit_color(deltaTime,self.screen,(0,330))
 
         self.card.blit_color(self.screen,(0,0),0)
 
