@@ -1,21 +1,22 @@
-[{
-    "Name":"Dragon's Breath",
-    "Icon":"",
-    "Description":"",
-    "DamageType":"Magical",
-    "DamageDuration":1,
-    "Damage":100,
-    "Mana":50,
-    "AreaOfEffect":true
-},
-{
-    "Name":"Stare of Medusa",
-    "Icon":"",
-    "Description":"",
-    "DamageType":"Magical",
-    "DamageDuration":4,
-    "Damage":15,
-    "Mana":150,
-    "AreaOfEffect":true
-}]
-
+[
+  {
+    "Name": "Dragon's Breath",
+    "Icon": "img/cards/Dragon_Breath.png",
+    "Description": "",
+    "DamageType": "Magical",
+    "DamageDuration": 1,
+    "Damage": 100,
+    "Mana": 50,
+    "AreaOfEffect": true
+  },
+  {
+    "Name": "Gaze of Medusa",
+    "Icon": "img/cards/Gaze_of_Medusa.png",
+    "Description": "",
+    "DamageType": "Magical",
+    "DamageDuration": 4,
+    "Damage": 10,
+    "Mana": 50,
+    "AreaOfEffect": true
+  }
+]

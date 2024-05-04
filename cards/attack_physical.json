@@ -1,19 +1,22 @@
-[{
-    "Name":"Arthur's Blade",
-    "Icon":"",
-    "Description":"",
-    "DamageType":"Physical",
-    "DamageDuration":3,
-    "Damage":20,
-    "Mana":30,
-    "AreaOfEffect":false
-},{
-    "Name":"Spear of Achilles",
-    "Icon":"",
-    "Description":"",
-    "DamageType":"Physical",
-    "DamageDuration":1,
-    "Damage":60,
-    "Mana":50,
-    "AreaOfEffect":false
-}]
+[
+  {
+    "Name": "Arthur's Blade",
+    "Icon": "img/cards/Arthurs_Blade.png",
+    "Description": "",
+    "DamageType": "Physical",
+    "DamageDuration": 3,
+    "Damage": 25,
+    "Mana": 30,
+    "AreaOfEffect": false
+  },
+  {
+    "Name": "Spear of Achilles",
+    "Icon": "img/cards/Spear_of_Achilles.png",
+    "Description": "",
+    "DamageType": "Physical",
+    "DamageDuration": 1,
+    "Damage": 120,
+    "Mana": 50,
+    "AreaOfEffect": false
+  }
+]
