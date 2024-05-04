@@ -1,6 +1,7 @@
 import pygame
 import pygame.surfarray
 from pygame.locals import *
+import json
 
 from Card import Card
 from Background import Background
@@ -17,6 +18,8 @@ class App:
         self.card=None
         self.bg=None
         self.character=None
+        self.cards_attack_magical=None
+        self.cards_attack_physical=None
  
     def on_init(self):
         pygame.init()
@@ -26,6 +29,16 @@ class App:
         self.card=Card()
         self.bg=Background()     
         self.character=Character()
+        with open('cards/attack_magical.json', 'r') as file:
+            data = ' '.join(file.readlines())
+            self.cards_attack_magical=json.loads(data)
+        
+        with open('cards/attack_physical.json', 'r') as file:
+            data = ' '.join(file.readlines())
+            self.cards_attack_physical=json.loads(data)
+
+        # self.cards_attack_magical[0]["Name"]
+        # self.cards_attack_physical[0]["Name"]
 
     def on_event(self, event):
         if event.type == pygame.QUIT:
