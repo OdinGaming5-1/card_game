@@ -8,7 +8,7 @@ class App:
     def __init__(self):
         self.running = True
         self.screen = None
-        self.size = self.weight, self.height = 640, 400
+        self.size = self.weight, self.height = 800, 600
         
         self.card=[]
  
@@ -26,6 +26,7 @@ class App:
     def on_render(self):
         # self.screen.blit(self.image_card,(0,0))
         self.card.blit_color(self.screen,(10,0),(255,0,0))
+        self.card.blit_color(self.screen,(10+self.card.width+40,0),(255,255,0))
         # background=pygame.Surface((40,40))
         # background.fill(pygame.Color(1,2,3,255)) #gbar
         # pxarray=pygame.surfarray.array2d(background)
