@@ -6,11 +6,13 @@ from Card import Card
 from Background import Background
 
 class App:
+    FPS=60
     def __init__(self):
         self.running = True
         self.screen = None
         self.size = self.weight, self.height = 928, 793
         
+        self.clock=pygame.time.Clock()
         self.card=None
         self.bg=None
  
@@ -20,18 +22,18 @@ class App:
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 
         self.card=Card()
-        self.bg=Background()
-
-        
+        self.bg=Background()        
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
     def on_loop(self):
+        self.clock.tick(self.FPS)
         pass
     def on_render(self):
-        self.bg.blit_color(self.screen,(0,0))
+        self.bg.blit_color(self.screen)
 
-        # self.card.blit_color(self.screen,(10,0),(255,0,0))
+        # self.card.blit_color(self.screen,(0,0),(255,0,0))
+
         # self.card.blit_color(self.screen,(10+self.card.width+20,0),(255,255,0))
         # self.card.blit_color(self.screen,(10+(self.card.width+20)*2,0),(255,255,0))
         pygame.display.flip()
@@ -42,7 +44,7 @@ class App:
     def on_execute(self):
         if self.on_init() == False:
             self.running = False
- 
+
         while( self.running ):
             for event in pygame.event.get():
                 self.on_event(event)

@@ -4,7 +4,6 @@ class Card:
     width=0
     height=0
     image=[]
-    pos=(0,0)
     __magic_color=(255,0,255,255)
 
     def __init__(self):
