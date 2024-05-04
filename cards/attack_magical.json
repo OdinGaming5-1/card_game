@@ -1,7 +1,7 @@
 [
   {
     "Name": "Dragon's Breath",
-    "Icon": "img/cards/Dragon_Breath.png",
+    "Icon": "img/cards/Dragon_Breath.jpg",
     "Description": "",
     "DamageType": "Magical",
     "DamageDuration": 1,
@@ -11,7 +11,7 @@
   },
   {
     "Name": "Gaze of Medusa",
-    "Icon": "img/cards/Gaze_of_Medusa.png",
+    "Icon": "img/cards/Gaze_of_Medusa.jpg",
     "Description": "",
     "DamageType": "Magical",
     "DamageDuration": 4,

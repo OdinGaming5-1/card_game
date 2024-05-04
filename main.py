@@ -53,7 +53,7 @@ class App:
 
         self.character.blit_color(self.screen,(0,330))
 
-        self.card.blit_color(self.screen,(0,0),(255,0,0))
+        self.card.blit_color(self.screen,(0,0),0)
 
         # self.card.blit_color(self.screen,(10+self.card.width+20,0),(255,255,0))
         # self.card.blit_color(self.screen,(10+(self.card.width+20)*2,0),(255,255,0))
