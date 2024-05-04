@@ -1,7 +1,6 @@
 import pygame
 import pygame.surfarray
 from pygame.locals import *
-import json
 
 from Card import Card
 from Background import Background
@@ -14,32 +13,23 @@ class App:
         self.screen = None
         self.size = self.weight, self.height = 928, 793
         
+        self.font=None
+
         self.clock=pygame.time.Clock()
         self.card=None
         self.bg=None
         self.character=None
-        self.cards_attack_magical=None
-        self.cards_attack_physical=None
- 
+        
     def on_init(self):
         pygame.init()
+        pygame.font.init()
         self.running = True
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 
         self.card=Card()
         self.bg=Background()     
         self.character=Character()
-        with open('cards/attack_magical.json', 'r') as file:
-            data = ' '.join(file.readlines())
-            self.cards_attack_magical=json.loads(data)
         
-        with open('cards/attack_physical.json', 'r') as file:
-            data = ' '.join(file.readlines())
-            self.cards_attack_physical=json.loads(data)
-
-        # self.cards_attack_magical[0]["Name"]
-        # self.cards_attack_physical[0]["Name"]
-
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
@@ -63,7 +53,7 @@ class App:
 
         self.character.blit_color(self.screen,(0,330))
 
-        # self.card.blit_color(self.screen,(0,0),(255,0,0))
+        self.card.blit_color(self.screen,(0,0),(255,0,0))
 
         # self.card.blit_color(self.screen,(10+self.card.width+20,0),(255,255,0))
         # self.card.blit_color(self.screen,(10+(self.card.width+20)*2,0),(255,255,0))
