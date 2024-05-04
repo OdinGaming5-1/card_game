@@ -1,62 +1,53 @@
 import pygame
 import pygame.surfarray
 from pygame.locals import *
-import numpy
+
+from Card import Card
 
 class App:
     def __init__(self):
-        self._running = True
-        self._display_surf = None
-        self._image_surf = None
+        self.running = True
+        self.screen = None
         self.size = self.weight, self.height = 640, 400
+        
+        self.card=[]
  
     def on_init(self):
         pygame.init()
-        self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
-        self._image_surf =pygame.image.load("img/okeypieces.jpeg").convert()
-        self._running = True
- 
+        self.running = True
+        self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
+        self.card=Card()
+        
     def on_event(self, event):
         if event.type == pygame.QUIT:
-            self._running = False
+            self.running = False
     def on_loop(self):
         pass
     def on_render(self):
-        self._display_surf.blit(self._image_surf,(0,0))
+        # self.screen.blit(self.image_card,(0,0))
+        self.card.blit_color(self.screen,(10,0),(255,0,0))
+        # background=pygame.Surface((40,40))
+        # background.fill(pygame.Color(1,2,3,255)) #gbar
+        # pxarray=pygame.surfarray.array2d(background)
 
-        # surf = pygame.display.set_mode((8,2),depth=3)
-        # width, height = surf.get_size()
-        # print(str(width)+"x"+str(height)+"x")
-        # pixels = numpy.array([
-        # [(255,0,0),(255,0,0),(255,0,0),(255,0,0),(255,0,0),(255,0,0),(255,0,0),(255,0,0)],
-        # [(255,0,0),(255,0,0),(255,0,0),(255,0,0),(255,0,0),(255,0,0),(255,0,0),(255,0,0)]
-        # ])
-        # print(pixels)
-        # pygame.surfarray.blit_array( surf, pixels )
-        # self._display_surf.blit(surf,(0,0))
-
-        background=pygame.Surface((40,40))
-        background.fill(Color(1,2,3,4)) #gbar
-        pxarray=pygame.surfarray.array2d(background)
-        for x in range(0,40):
-            for y in range(0,40):
-                pix=pxarray[x,y]
-                r=pix >> 24 & 0xFF
-                g=pix>> 16 & 0xFF
-                b=pix>> 8 & 0xFF
-                a=pix & 0xFF
-                print("r:"+str(r)+" g:"+str(g)+" b:"+str(b)+" a:"+str(a))
-        pygame.surfarray.blit_array(self._display_surf.subsurface(Rect(0,0,40,40)),pxarray)
+        # w,h=120,160
+        # pxarray=pygame.PixelArray(self.screen.subsurface(Rect(0,0,w,h)))
+        # for x in range(0,w):
+        #     for y in range(0,h):
+        #         if pxarray[x,y]==(self.screen.map_rgb((255,0,255,255)) & 0xffffffff):
+        #             pxarray[x,y]=(255,0,0)
+        
+        # pygame.surfarray.blit_array(self.screen.subsurface(Rect(0,0,w,h)),pxarray)
         pygame.display.flip()
-
+                                       
     def on_cleanup(self):
         pygame.quit()
  
     def on_execute(self):
         if self.on_init() == False:
-            self._running = False
+            self.running = False
  
-        while( self._running ):
+        while( self.running ):
             for event in pygame.event.get():
                 self.on_event(event)
             self.on_loop()
