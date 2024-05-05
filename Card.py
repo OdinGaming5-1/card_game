@@ -1,5 +1,6 @@
 import pygame
 import json
+import math
 
 class CardObj:
     bg_image=None
@@ -19,10 +20,21 @@ class CardObj:
     font=None
     def __init__(self,damage_type,index):
         self.font= pygame.font.SysFont('Arial', 20)
-        surface=pygame.image.load("img/cards/card_bg.png").convert()
-        self.bg_image=pygame.transform.scale(surface, (240,280))
-        pygame.draw.rect(self.bg_image, (0,0,0), pygame.Rect(0, 0, 240, 280))
-
+        # surface=pygame.image.load("img/cards/card_bg.png").convert()
+        # self.bg_image=pygame.transform.scale(surface, (240,280))
+        # pygame.draw.rect(self.bg_image, (0,0,0), pygame.Rect(0, 0, 240, 280))
+        self.bg_image=pygame.Surface((240,280))
+        width,height=self.bg_image.get_size()
+        # self.bg_image.fill((0,0,0))
+        color1=0
+        color2=255
+        data=pygame.PixelArray(self.bg_image)
+        for x in range(0,width):
+            for y in range(0,height):
+                res=math.floor((1-y/height)*color1+(y/height)*color2)
+                data[x,y]=(res,0,0)
+        pygame.surfarray.blit_array(self.bg_image,data)
+        
         if damage_type=="Magical":
             with open('cards/attack_magical.json', 'r') as file:
                 data = ' '.join(file.readlines())
