@@ -1,3 +1,6 @@
+import pygame
+from Card import Card
+
 class CardLayoutManager:
     deckIndex=0
 
@@ -5,6 +8,9 @@ class CardLayoutManager:
         self.maxWidth = maxWidth
         self.maxHeight = maxHeight
         self.cards = []
+
+        self.rects =[]
+        self.selected_card_index=0
 
     def addCards(self, cards):
         for card in cards:
@@ -22,6 +28,7 @@ class CardLayoutManager:
         vertical_padding=50
         row=1
         col=1
+        self.rects =[]
         for card in self.cards:
             x=left_padding+card.width*(row-1)+10*row
             if(x + left_padding + right_padding + card.width > self.maxWidth):
@@ -31,4 +38,23 @@ class CardLayoutManager:
             y=vertical_padding+(card.height+10)*(col-1)
             row=row+1
             card.blit_color(screen,(x,y))
+            self.rects.append(pygame.Rect(x,y,card.width,card.height))
+        
+        # render a chosen card
+        selected_card=pygame.transform.scale2x(self.cards[self.selected_card_index].get_image())
+        w,h=selected_card.get_size()
+        screen.blit(selected_card,(self.maxWidth-w-30,vertical_padding))
     
+    def event_handler(self,event):
+        index=None
+        (x, y)=pygame.mouse.get_pos()
+        for i in range(0,len(self.rects)):
+            rect=self.rects[i]
+            if rect.collidepoint(x, y):
+                index=i
+                break
+
+        if index is not None:
+            self.selected_card_index=index
+
+        return self

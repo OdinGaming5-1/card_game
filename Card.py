@@ -32,7 +32,7 @@ class Card:
         self.image=pygame.transform.scale(pygame.image.load(self.cardData.Icon).convert().copy(), (self.width-20,self.width-20))
         self.bg_image.blit(self.image,(10,10))
 
-        self.font= pygame.font.SysFont('Arial', 24, bold=False)
+        self.font= pygame.font.SysFont('Arial', 18, bold=False)
         text_surface = self.font.render(self.cardData.Name, True, (255, 255, 255))
         self.bg_image.blit(text_surface,(10,self.width))
 

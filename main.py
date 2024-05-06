@@ -60,7 +60,8 @@ class App:
                 self.character.change_state("_Run")
             else:
                 self.character.change_state("_Idle")
-
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            self.card_layout_manager.event_handler(event)
     def on_loop(self):
         now = time.time()
         self.dt = now - self.prev_time
