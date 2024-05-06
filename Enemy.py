@@ -2,7 +2,9 @@ from config import *
 import pygame
 import math
 
-class Sprite:
+from Character import Sprite
+
+class EnemySprite(Sprite):
     width=0
     height=0
     frames=None
@@ -18,7 +20,7 @@ class Sprite:
     def getSurface(self,dt):
         
         if self.template_img is None:
-            self.template_img=pygame.image.load(config.config("user_character_folder")+self.template_fname+".png").convert_alpha()
+            self.template_img=pygame.image.load(config.config("enemy_character_folder")+self.template_fname+".png").convert_alpha()
             full_width,self.height=self.template_img.get_size()
             self.frames=full_width/self.width
 
@@ -26,8 +28,8 @@ class Sprite:
         self.i=(self.i+((1 * dt)/self.duration))%self.frames
         return surface
 
-class Character:
-    sprites={"_Idle":Sprite("_Idle",120),"_Attack":Sprite("_Attack",120),"_Run":Sprite("_Run",120),"_Roll":Sprite("_Roll",120)}
+class Enemy:
+    sprites={"_Idle":EnemySprite("_Idle",150),"_Spear":EnemySprite("_Spear",150),"_Run":EnemySprite("_Run",150),"_Death":EnemySprite("_Death",150)}
     state="_Run"
     
     def __init__(self):

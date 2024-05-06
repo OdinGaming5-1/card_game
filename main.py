@@ -6,6 +6,7 @@ import time
 from Card import Card
 from Background import Background
 from Character import Character
+from Enemy import Enemy
 
 class App:
     FPS=60
@@ -18,11 +19,12 @@ class App:
         self.size = self.weight, self.height = 928, 820
         
         self.font=None
-
         self.clock=pygame.time.Clock()
+
         self.card=None
         self.bg=None
         self.character=None
+        self.enemy=None
         
     def on_init(self):
         pygame.init()
@@ -34,6 +36,7 @@ class App:
         self.card2=Card("Magical",1)
         self.bg=Background()     
         self.character=Character()
+        self.enemy=Enemy()
         
     def on_event(self, event):
         if event.type == pygame.QUIT:
@@ -58,15 +61,15 @@ class App:
 
     def on_render(self):
         deltaTime = self.dt * self.TARGET_FPS
-        self.bg.blit_color(deltaTime, self.screen)
 
+        self.bg.blit_color(deltaTime, self.screen)
         self.character.blit_color(deltaTime,self.screen,(0,330))
 
-        self.card.blit_color(self.screen,(0,self.height-280),0)
-        self.card2.blit_color(self.screen,(250,self.height-280),0)
+        self.enemy.blit_color(deltaTime,self.screen,(100,290))
 
-        # self.card.blit_color(self.screen,(10+self.card.width+20,0),(255,255,0))
-        # self.card.blit_color(self.screen,(10+(self.card.width+20)*2,0),(255,255,0))
+        self.card.blit_color(self.screen,(0,self.height-280))
+        self.card2.blit_color(self.screen,(250,self.height-280))
+
         pygame.display.flip()
                                        
     def on_cleanup(self):

@@ -1,8 +1,9 @@
+from config import *
 import pygame
 import json
 import math
 
-class CardObj:
+class Card:
     bg_image=None
     image=None
     width=0
@@ -20,16 +21,13 @@ class CardObj:
     font=None
     def __init__(self,damage_type,index):
         self.font= pygame.font.SysFont('Arial', 20)
-        # surface=pygame.image.load("img/cards/card_bg.png").convert()
-        # self.bg_image=pygame.transform.scale(surface, (240,280))
-        # pygame.draw.rect(self.bg_image, (0,0,0), pygame.Rect(0, 0, 240, 280))
  
         if damage_type=="Magical":
-            with open('cards/attack_magical.json', 'r') as file:
+            with open(config.config("magicalcards"), 'r') as file:
                 data = ' '.join(file.readlines())
                 self.cards=json.loads(data)
         elif damage_type=="Physical":   
-            with open('cards/attack_physical.json', 'r') as file:
+            with open(config.config("physicalcards"), 'r') as file:
                 data = ' '.join(file.readlines())
                 self.cards=json.loads(data)
 
@@ -66,11 +64,11 @@ class CardObj:
 
         self.bg_image.blit(self.image,(10,10))
 
-        self.font= pygame.font.SysFont('Arial', 24, bold=True)
+        self.font= pygame.font.SysFont('Arial', 25, bold=False)
         text_surface = self.font.render(self.Name, True, (255, 255, 255))
         self.bg_image.blit(text_surface,(10,240))
 
-        self.font= pygame.font.SysFont('Arial', 18, bold=True)
+        self.font= pygame.font.SysFont('Arial', 18, bold=False)
         text_surface = self.font.render(str(self.Damage)+"d", True, (255, 255, 255))
         self.bg_image.blit(text_surface,(195,10))
 
@@ -89,23 +87,6 @@ class CardObj:
         
         return self.bg_image
 
-
-class Card:
-    __magic_color=(255,0,255,255)
-    
-    obj=None
-
-    def __init__(self,type,index):
-        self.obj=CardObj(type,index)
-    
-    def blit_color(self,screen,pos,i):
-        # data=pygame.PixelArray(self.image.copy())
-        # for x in range(0,self.width):
-        #     for y in range(0,self.height):
-        #         if data[x,y]==(screen.map_rgb(self.__magic_color) & 0xffffffff):
-        #             data[x,y]=color
-        # pygame.surfarray.blit_array(screen.subsurface(pygame.Rect(pos[0],pos[1],self.width,self.height)),data)
-        screen.blit(self.obj.get_image(),pos)
-        
+    def blit_color(self,screen,pos):
+        screen.blit(self.get_image(),pos)
         return self
-
