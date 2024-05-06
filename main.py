@@ -7,21 +7,23 @@ from Card import Card
 from Background import Background
 from Character import Character
 from Enemy import Enemy
+from CardLayoutManager import CardLayoutManager
 
 class App:
     FPS=60
     prev_time=time.time()
     TARGET_FPS=60
     dt=0
+    card_layout_manager=None
     def __init__(self):
         self.running = True
         self.screen = None
-        self.size = self.weight, self.height = 928, 820
+        self.size = self.weight, self.height = 1200, 820
         
         self.font=None
         self.clock=pygame.time.Clock()
+        self.card_layout_manager=CardLayoutManager(self.weight, self.height)
 
-        self.card=None
         self.bg=None
         self.character=None
         self.enemy=None
@@ -32,8 +34,16 @@ class App:
         self.running = True
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 
-        self.card=Card("Physical",0)
-        self.card2=Card("Magical",1)
+        self.card_layout_manager.addCards([
+            Card("Physical",0),
+            Card("Magical",1),
+            Card("Physical",1),
+            Card("Magical",0),
+            Card("Physical",0),
+            Card("Magical",1),
+            Card("Physical",1),
+            Card("Magical",0),
+        ])
         self.bg=Background()     
         self.character=Character()
         self.enemy=Enemy()
@@ -48,8 +58,6 @@ class App:
                 self.character.change_state("_Attack")
             elif event.key == pygame.K_RIGHT:
                 self.character.change_state("_Run")
-            elif event.key == pygame.K_SPACE:
-                self.character.change_state("_Roll")
             else:
                 self.character.change_state("_Idle")
 
@@ -66,9 +74,8 @@ class App:
         self.character.blit_color(deltaTime,self.screen,(0,330))
 
         self.enemy.blit_color(deltaTime,self.screen,(100,290))
-
-        self.card.blit_color(self.screen,(0,self.height-280))
-        self.card2.blit_color(self.screen,(250,self.height-280))
+        #self.card_layout_manager.deckLayout(self.screen)
+        self.card_layout_manager.inventoryLayout(self.screen)
 
         pygame.display.flip()
                                        
