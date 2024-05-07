@@ -42,19 +42,24 @@ class CardLayoutManager:
         
         # render a chosen card
         selected_card=pygame.transform.scale2x(self.cards[self.selected_card_index].get_image())
+        self.cards[self.selected_card_index].glow=True
         w,h=selected_card.get_size()
         screen.blit(selected_card,(self.maxWidth-w-30,vertical_padding))
     
     def event_handler(self,event):
         index=None
+        for card in self.cards:
+            card.glow=False
+
         (x, y)=pygame.mouse.get_pos()
         for i in range(0,len(self.rects)):
             rect=self.rects[i]
             if rect.collidepoint(x, y):
                 index=i
                 break
-
+        
         if index is not None:
             self.selected_card_index=index
+            self.cards[index].glow=True
 
         return self

@@ -8,6 +8,8 @@ class Card:
     width=0
     height=0
 
+    glow=False
+
     cardData=None
     font=None
     def __init__(self,damage_type,index):
@@ -57,4 +59,7 @@ class Card:
 
     def blit_color(self,screen,pos):
         screen.blit(self.get_image(),pos)
+        if self.glow:
+            rec=self.get_image().get_rect()
+            pygame.draw.rect(screen, (255,255,255),pygame.Rect(pos[0],pos[1],rec[2],rec[3]) , width=2)
         return self
