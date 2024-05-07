@@ -2,7 +2,7 @@ import pygame
 from Card import Card
 
 class CardLayoutManager:
-    deckIndex=0
+    # deckIndex=0
 
     def __init__(self,maxWidth,maxHeight):
         self.maxWidth = maxWidth
@@ -17,10 +17,11 @@ class CardLayoutManager:
             self.cards.append(card)
     
     def deckLayout(self,screen):
-        
+        self.rects =[]
         for i in range(0,len(self.cards)):
             card=self.cards[i]
             card.blit_color(screen,(card.width*i+10*(i+1),self.maxHeight-card.height-10))
+            self.rects.append(pygame.Rect(card.width*i+10*(i+1),self.maxHeight-card.height-10,card.width,card.height))
     
     def inventoryLayout(self,screen):
         left_padding=50

@@ -62,6 +62,7 @@ class App:
                 self.character.change_state("_Idle")
         elif event.type == pygame.MOUSEBUTTONDOWN:
             self.card_layout_manager.event_handler(event)
+            
     def on_loop(self):
         now = time.time()
         self.dt = now - self.prev_time
@@ -75,8 +76,8 @@ class App:
         self.character.blit_color(deltaTime,self.screen,(0,330))
 
         self.enemy.blit_color(deltaTime,self.screen,(100,290))
-        #self.card_layout_manager.deckLayout(self.screen)
-        self.card_layout_manager.inventoryLayout(self.screen)
+        self.card_layout_manager.deckLayout(self.screen)
+        #self.card_layout_manager.inventoryLayout(self.screen)
 
         pygame.display.flip()
                                        
