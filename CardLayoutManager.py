@@ -18,10 +18,10 @@ class CardLayoutManager:
         return self
     
     def deckLayout(self,screen:pygame.Surface):
-        deck_height=self.cards[0].height+50+10
-        surface=pygame.Surface((self.maxWidth,deck_height))
-        surface.fill((0,0,0))
-        screen.blit(surface,(0,self.maxHeight-deck_height))
+        # deck_height=self.cards[0].height+50+10
+        # surface=pygame.Surface((self.maxWidth,deck_height))
+        # surface.fill((0,0,0))
+        # screen.blit(surface,(0,self.maxHeight-deck_height))
 
         self.rects =[]
         glow_i=None

@@ -13,6 +13,7 @@ from Enemy import Enemy
 from CardLayoutManager import CardLayoutManager
 from Button import Button
 from Healthbar import Healthbar
+from StaticBackground import StaticBackground
 
 class App:
     FPS=60
@@ -34,7 +35,7 @@ class App:
         self.inplay= False
         
         self.screen = None
-        self.size = self.width, self.height = 1200, 820
+        self.size = self.width, self.height = 1368, 768
         
         self.font=None
         self.clock=pygame.time.Clock()
@@ -67,6 +68,8 @@ class App:
 
         self.button1=Button((200,200),"Play")
         self.button2=Button((200,200+50+10),"Exit")
+
+        self.static_bg=StaticBackground(self.width, self.height)
 
         self.healthbar=Healthbar((20,10))
         self.manabar=Healthbar((20,10+30+10),bg=(50,50,170))
@@ -155,9 +158,10 @@ class App:
                 self.button1.blit(self.screen)
                 self.button2.blit(self.screen)
         if self.inplay:
-            self.bgsurf=pygame.Surface((self.width,self.height))
-            self.bgsurf.fill((0,0,0))
-            self.screen.blit(self.bgsurf,(0,0))
+            #self.bgsurf=pygame.Surface((self.width,self.height))
+            #self.bgsurf.fill((0,0,0))
+            #self.screen.blit(self.bgsurf,(0,0))
+            self.static_bg.blit_color(self.screen)
             self.card_layout_manager.deckLayout(self.screen)
             #self.card_layout_manager.inventoryLayout(self.screen)
             self.healthbar.blit(self.screen)
