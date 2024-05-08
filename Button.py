@@ -35,7 +35,7 @@ class Button:
             
         if event.type == pygame.MOUSEMOTION:
             if self._rect.collidepoint(x, y):
-                self.bg=(220,0,0)
+                self.bg=(130,130,180)
             else:
                 self.bg=(180,180,180)
                 

@@ -92,7 +92,7 @@ class App:
             self.running = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                # toggle menuqweqq
+                # toggle menu
                 if not self.inmenu:
                     self.inintro=False
                     self.inplay=False
@@ -139,7 +139,6 @@ class App:
         if self.inintro:
             self.bg.blit_color(deltaTime, self.screen)
             self.character.blit_color(deltaTime,self.screen,(0,330))
-
             self.enemy.blit_color(deltaTime,self.screen,(100,290))
             
         if self.inmenu:
