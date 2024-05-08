@@ -17,7 +17,7 @@ class Button:
 
 
     def blit(self,screen:pygame.Surface):
-        
+        self._surface.fill(self.bg)
         font=pygame.font.SysFont('Arial', 18, bold=False)
         text_surface = font.render(self.text, True, (0, 0, 0))
         
@@ -28,6 +28,16 @@ class Button:
 
     def event_handler(self,event,callback):
         (x, y)=pygame.mouse.get_pos()
-        if self._rect.collidepoint(x, y):
-            callback()
+        
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self._rect.collidepoint(x, y):
+                callback()
+            
+        if event.type == pygame.MOUSEMOTION:
+            if self._rect.collidepoint(x, y):
+                self.bg=(220,0,0)
+            else:
+                self.bg=(180,180,180)
+                
+
         return self

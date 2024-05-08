@@ -43,6 +43,7 @@ class App:
         self.character=None
         self.enemy=None
         
+        self.bgsurf=None
     def on_init(self):
         pygame.init()
         pygame.font.init()
@@ -111,8 +112,9 @@ class App:
                 self.character.change_state("_Idle")
         elif event.type == pygame.MOUSEBUTTONDOWN:
             self.card_layout_manager.event_handler(event)
-            self.button1.event_handler(event,self.btn_click_play)
-            self.button2.event_handler(event,self.btn_click_exit)
+        
+        self.button1.event_handler(event,self.btn_click_play)
+        self.button2.event_handler(event,self.btn_click_exit)
 
     #button clicks
     def btn_click_play(self):
@@ -146,9 +148,9 @@ class App:
                 self.button1.blit(self.screen)
                 self.button2.blit(self.screen)
         if self.inplay:
-            self.bg=pygame.Surface((self.width,self.height))
-            self.bg.fill((0,0,0))
-            self.screen.blit(self.bg,(0,0))
+            self.bgsurf=pygame.Surface((self.width,self.height))
+            self.bgsurf.fill((0,0,0))
+            self.screen.blit(self.bgsurf,(0,0))
             self.card_layout_manager.deckLayout(self.screen)
             #self.card_layout_manager.inventoryLayout(self.screen)
 
