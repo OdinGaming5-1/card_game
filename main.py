@@ -11,6 +11,7 @@ from Background import Background
 from Character import Character
 from Enemy import Enemy
 from CardLayoutManager import CardLayoutManager
+from Button import Button
 
 class App:
     FPS=60
@@ -26,7 +27,11 @@ class App:
 
     def __init__(self):
         self.running = True
+        
         self.inmenu = False
+        self.inintro = True
+        self.inplay= False
+        
         self.screen = None
         self.size = self.width, self.height = 1200, 820
         
@@ -58,8 +63,10 @@ class App:
         self.character=Character()
         self.enemy=Enemy()
 
+        self.button1=Button((200,200),"Play")
+        self.button2=Button((200,200+50+10),"Exit")
         # self.vision_thread = threading.Thread(target=self.vision_thread, args=())
-        # self.vision_thread.start()
+        # self.vision_th read.start()
         
     # a little effect
     def vision_thread(self):
@@ -84,11 +91,17 @@ class App:
             self.running = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                # toggle menu
-                self.inmenu=not self.inmenu
-                if self.inmenu:
+                # toggle menuqweqq
+                if not self.inmenu:
+                    self.inintro=False
+                    self.inplay=False
+                    self.inmenu=True
                     self.vision_screen=self.screen.copy()
                     self.vision_thread()
+                else:
+                    self.inmenu=False
+                    self.inintro=True
+                    self.inplay=False
 
             elif event.key == pygame.K_LEFT:
                 self.character.change_state("_Attack")
@@ -98,7 +111,20 @@ class App:
                 self.character.change_state("_Idle")
         elif event.type == pygame.MOUSEBUTTONDOWN:
             self.card_layout_manager.event_handler(event)
+            self.button1.event_handler(event,self.btn_click_play)
+            self.button2.event_handler(event,self.btn_click_exit)
 
+    #button clicks
+    def btn_click_play(self):
+        self.inmenu=False
+        self.inintro=False
+        self.inplay=True                               
+
+        return self
+    def btn_click_exit(self):
+        self.running = False
+        return self
+                    
     def on_loop(self):
         now = time.time()
         self.dt = now - self.prev_time
@@ -108,18 +134,24 @@ class App:
     def on_render(self):
         deltaTime = self.dt * self.TARGET_FPS
 
-        if not self.inmenu:
+        if self.inintro:
             self.bg.blit_color(deltaTime, self.screen)
             self.character.blit_color(deltaTime,self.screen,(0,330))
 
             self.enemy.blit_color(deltaTime,self.screen,(100,290))
-            #self.card_layout_manager.deckLayout(self.screen)
-            #self.card_layout_manager.inventoryLayout(self.screen)
             
-        else:
+        if self.inmenu:
             if not self.vision_screen.get_locked():
                 self.screen.blit(self.vision_surface,(0,0))
-            
+                self.button1.blit(self.screen)
+                self.button2.blit(self.screen)
+        if self.inplay:
+            self.bg=pygame.Surface((self.width,self.height))
+            self.bg.fill((0,0,0))
+            self.screen.blit(self.bg,(0,0))
+            self.card_layout_manager.deckLayout(self.screen)
+            #self.card_layout_manager.inventoryLayout(self.screen)
+
         pygame.display.flip()
                                        
     def on_cleanup(self):
