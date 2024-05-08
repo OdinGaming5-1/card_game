@@ -12,6 +12,7 @@ from Character import Character
 from Enemy import Enemy
 from CardLayoutManager import CardLayoutManager
 from Button import Button
+from Healthbar import Healthbar
 
 class App:
     FPS=60
@@ -66,6 +67,9 @@ class App:
 
         self.button1=Button((200,200),"Play")
         self.button2=Button((200,200+50+10),"Exit")
+
+        self.healthbar=Healthbar((20,10))
+        self.manabar=Healthbar((20,10+30+10),bg=(50,50,170))
         # self.vision_thread = threading.Thread(target=self.vision_thread, args=())
         # self.vision_th read.start()
         
@@ -104,6 +108,10 @@ class App:
                     self.inintro=True
                     self.inplay=False
 
+            elif event.key == pygame.K_UP:
+                self.healthbar.increment()
+            elif event.key == pygame.K_DOWN:
+                self.healthbar.decrement()
             elif event.key == pygame.K_LEFT:
                 self.character.change_state("_Attack")
             elif event.key == pygame.K_RIGHT:
@@ -152,6 +160,8 @@ class App:
             self.screen.blit(self.bgsurf,(0,0))
             self.card_layout_manager.deckLayout(self.screen)
             #self.card_layout_manager.inventoryLayout(self.screen)
+            self.healthbar.blit(self.screen)
+            self.manabar.blit(self.screen)
 
         pygame.display.flip()
                                        
