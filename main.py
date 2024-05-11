@@ -26,6 +26,7 @@ class App:
     vision_surface=None
     vision_screen=None
     vision_render=False
+    drag_card_flag=False
 
     def __init__(self):
         self.running = True
@@ -122,8 +123,13 @@ class App:
             else:
                 self.character.change_state("_Idle")
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            self.card_layout_manager.event_handler(event)
-        
+            self.drag_card_flag=True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.drag_card_flag=False
+            self.card_layout_manager.dropCard(self.screen)
+
+        self.card_layout_manager.event_handler()
+
         self.button1.event_handler(event,self.btn_click_play)
         self.button2.event_handler(event,self.btn_click_exit)
 
@@ -166,6 +172,8 @@ class App:
             #self.card_layout_manager.inventoryLayout(self.screen)
             self.healthbar.blit(self.screen)
             self.manabar.blit(self.screen)
+            if self.drag_card_flag:
+                self.card_layout_manager.dragCard(self.screen)
 
         pygame.display.flip()
                                        

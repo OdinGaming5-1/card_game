@@ -7,9 +7,9 @@ class CardLayoutManager:
     def __init__(self,maxWidth,maxHeight):
         self.maxWidth = maxWidth
         self.maxHeight = maxHeight
-        self.cards = []
+        self.cards:list[Card] = []
 
-        self.rects =[]
+        self.rects:list[pygame.Rect] =[]
         self.selected_card_index=0
 
     def addCards(self, cards):
@@ -17,6 +17,19 @@ class CardLayoutManager:
             self.cards.append(card)
         return self
     
+    def dragCard(self,screen:pygame.Surface):
+        (x, y)=pygame.mouse.get_pos()
+        card=self.cards[self.selected_card_index]
+        card.drag=True
+        card.blit_color(screen,(x-card.width/2,y-card.height/2))
+        
+    def dropCard(self,screen:pygame.Surface):
+        (x, y)=pygame.mouse.get_pos()
+        card=self.cards[self.selected_card_index]
+        card.drag=False
+        card.blit_color(screen,(x-card.width/2,y-card.height/2))
+        
+
     def deckLayout(self,screen:pygame.Surface):
         # deck_height=self.cards[0].height+50+10
         # surface=pygame.Surface((self.maxWidth,deck_height))
@@ -25,16 +38,23 @@ class CardLayoutManager:
 
         self.rects =[]
         glow_i=None
-        for i in range(0,len(self.cards)):
+        length=len(self.cards)
+        index=0
+        for i in range(0,length):
             card=self.cards[i]
-            (x,y)=(card.width/2*i+10*(i+1),self.maxHeight-card.height-10)
+            if i == self.selected_card_index and card.drag:
+                continue
+            (x,y)=(card.width*0.5*index+10*(index+1),self.maxHeight-card.height-10)
+            collision=1
+            if i != length-1:
+                collision=0.5
             if card.glow:
                 glow_i=i
-
-                self.rects.append(pygame.Rect(x,y-50,card.width/2,card.height))
+                self.rects.append(pygame.Rect(x,y-50,card.width*collision,card.height))
             else:
                 card.blit_color(screen,(x,y))
-                self.rects.append(pygame.Rect(x,y,card.width/2,card.height))
+                self.rects.append(pygame.Rect(x,y,card.width*collision,card.height))
+            index = index + 1
 
         # draw on top
         if glow_i is not None:
@@ -44,7 +64,7 @@ class CardLayoutManager:
             
         return self
     
-    def inventoryLayout(self,screen):
+    def inventoryLayout(self,screen:pygame.Surface):
         left_padding=50
         right_padding=350
         vertical_padding=50
@@ -68,7 +88,8 @@ class CardLayoutManager:
         w,h=selected_card.get_size()
         screen.blit(selected_card,(self.maxWidth-w-30,vertical_padding))
         return self
-    def event_handler(self,event):
+    
+    def event_handler(self):
         index=None
         for card in self.cards:
             card.glow=False

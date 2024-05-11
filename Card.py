@@ -9,6 +9,7 @@ class Card:
     height=0
 
     glow=False
+    drag=False
 
     cardData=None
     font=None
